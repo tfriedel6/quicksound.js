@@ -232,9 +232,14 @@ var quicksound = {};
         var fullTries = 4;
         checkForContext(6);
         function createContext() {
-            document.getElementById('audioSWF').innerHTML = '<object id="audioSWF1" width="1" height="1">' +
-                '<param name="movie" value="quicksound.swf">' +
-                '<embed id="audioSWF2" src="quicksound.swf" width="1" height="1"></embed>' +
+			var audioSWFElement = document.getElementById('audioSWF');
+			if (audioSWFElement == null) {
+				audioSWFElement = document.createElement('span');
+				document.body.appendChild(audioSWFElement);
+			}
+            audioSWFElement.innerHTML = '<object id="audioSWF1" width="1" height="1">' +
+                '<param name="movie" value="quicksound-0.5.swf">' +
+                '<embed id="audioSWF2" src="quicksound-0.5.swf" width="1" height="1"></embed>' +
                 '</object>';
         }
 
@@ -312,9 +317,8 @@ var quicksound = {};
         }
     }
 
-    function flashStop(audioContext, sound) {
-        delete sound.resumePosition;
-        audioContext.stopSound(sound.audioBuffer);
+    function flashStop(audioContext, id) {
+        audioContext.stopSound(id);
     }
 
     var isArray = Array.isArray ? Array.isArray : function (arg) {
