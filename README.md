@@ -41,14 +41,14 @@ quicksound.bestFormat(['aac','ogg','mp3','wav'])
 
 This loads one or more sounds from specified paths. The options object is expected to contain the following properties:
 
-**path** or **paths**: a string, array or object that defines where to load the sounds from.
-**doneFunc**: callback when all sounds are successfully loaded. Parameters are the options object and result object.
-**errorFunc**: callback if one or more sounds were not successfully loaded. Parameters are the options object and if at least one sound was successfully loaded the result object.
+* **path** or **paths**: a string, array or object that defines where to load the sounds from.
+* **doneFunc**: callback when all sounds are successfully loaded. Parameters are the options object and result object.
+* **errorFunc**: callback if one or more sounds were not successfully loaded. Parameters are the options object and if at least one sound was successfully loaded the result object.
 
 Optional options:
 
-**extension**: the file extension to use for each given path
-**retries**: the number of times the libary will retry loading the resource from the server (default 3)
+* **extension**: the file extension to use for each given path
+* **retries**: the number of times the libary will retry loading the resource from the server (default 3)
 
 See the examples for usage:
 
