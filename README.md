@@ -2,6 +2,8 @@
 
 A very simple JavaScript sound library using the Web Audio API and a fallback to flash.
 
+To use this library, download the minified (or non-minified) JS in the release directory, as well as the swf file which must be placed next to the HTML in which you include the JS.
+
 ## Example
 
 ```js
