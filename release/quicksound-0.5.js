@@ -12,12 +12,9 @@ var quicksound = {};
             }
         }
         if (audioContext != null) {
-            quicksound.getBestAudioFormat = webAudioGetBestAudioFormat;
-            quicksound.loader = function (options) {
-                return loader(audioContext, options, webAudioCreateSingleLoader);
-            };
+            quicksound.bestFormat = webAudioGetBestAudioFormat;
             quicksound.load = function (options) {
-                quicksound.loader(options)();
+                return load(audioContext, options, webAudioCreateSingleLoader);
             };
             quicksound.play = function (sound, offset, loop) {
                 webAudioPlay(audioContext, sound, offset, loop);
@@ -27,12 +24,9 @@ var quicksound = {};
         } else {
             flashCreateAudioContext(function(flashAudioContext) {
                 if (flashAudioContext != null) {
-                    quicksound.getBestAudioFormat = flashGetBestAudioFormat;
-                    quicksound.loader = function (options) {
-                        return loader(flashAudioContext, options, flashCreateSingleLoader);
-                    };
+                    quicksound.bestFormat = flashGetBestAudioFormat;
                     quicksound.load = function (options) {
-                        quicksound.loader(options)();
+                        return load(flashAudioContext, options, flashCreateSingleLoader);
                     };
                     quicksound.play = function (sound, offset, loop) {
                         flashPlay(flashAudioContext, sound, offset, loop);
@@ -93,7 +87,7 @@ var quicksound = {};
         }
     }
 
-    function loader(audioContext, options, createSingleLoaderFunc) {
+    function load(audioContext, options, createSingleLoaderFunc) {
         if (options.paths != null) {
             options.path = options.paths;
         }
@@ -149,10 +143,8 @@ var quicksound = {};
                 });
             }
 
-            return function () {
-                for (var i = 0; i < loaders.length; i++) {
-                    loaders[i]();
-                }
+            for (i = 0; i < loaders.length; i++) {
+                loaders[i]();
             }
         }
     }
