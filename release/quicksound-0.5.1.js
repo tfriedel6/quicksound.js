@@ -243,8 +243,8 @@ var quicksound = {};
 				document.body.appendChild(audioSWFElement);
 			}
             audioSWFElement.innerHTML = '<object id="audioSWF1" width="1" height="1">' +
-                '<param name="movie" value="quicksound-0.5.swf">' +
-                '<embed id="audioSWF2" src="quicksound-0.5.swf" width="1" height="1"></embed>' +
+                '<param name="movie" value="quicksound-0.5.1.swf">' +
+                '<embed id="audioSWF2" src="quicksound-0.5.1.swf" width="1" height="1"></embed>' +
                 '</object>';
         }
 
