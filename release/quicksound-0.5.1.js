@@ -98,9 +98,29 @@ var quicksound = {};
         if (typeof(options.path) == 'string') {
             return createSingleLoaderFunc(audioContext, options.path + extension, options);
         } else {
+			loadMultipleAudios();
+		}
+        
+        function loadMultipleAudios() {
             var loaders = [];
             var successCount = 0, errorCount = 0;
             var result = {};
+
+            if (isArray(options.path)) {
+                for (var i = 0; i < options.path.length; i++) {
+                    loaders.push(makeLoader(options.path[i], options.path[i]));
+                }
+            } else {
+                for (var id in options.path) {
+                    if (options.path.hasOwnProperty(id)) {
+                        loaders.push(makeLoader(options.path[id], id));
+                    }
+                }
+            }
+
+            for (i = 0; i < loaders.length; i++) {
+                loaders[i]();
+            }
 
             function doneFunc(options, audioBuffer) {
                 result[options.id] = audioBuffer;
@@ -123,17 +143,6 @@ var quicksound = {};
                 }
             }
 
-            if (isArray(options.path)) {
-                for (var i = 0; i < options.path.length; i++) {
-                    loaders.push(makeLoader(options.path[i], options.path[i]));
-                }
-            } else {
-                for (var id in options.path) {
-                    if (options.path.hasOwnProperty(id)) {
-                        loaders.push(makeLoader(options.path[id], id));
-                    }
-                }
-            }
             function makeLoader(path, id) {
                 return createSingleLoaderFunc(audioContext, path + extension, {
                     retries: options.retries,
@@ -142,11 +151,7 @@ var quicksound = {};
                     errorFunc: errorFunc
                 });
             }
-
-            for (i = 0; i < loaders.length; i++) {
-                loaders[i]();
-            }
-        }
+		}
     }
 
     function webAudioCreateSingleLoader(audioContext, path, options) {
