@@ -1,6 +1,10 @@
 var quicksound = {};
 
 (function () {
+    quicksound.version = function() {
+        return "0.5.2";
+    };
+
     quicksound.create = function (doneFunc, errorFunc) {
         var audioContext = null;
         try {
@@ -22,7 +26,7 @@ var quicksound = {};
             quicksound.stop = webAudioStop;
             setTimeout(doneFunc, 1);
         } else {
-            flashCreateAudioContext(function(flashAudioContext) {
+            flashCreateAudioContext(function (flashAudioContext) {
                 if (flashAudioContext != null) {
                     quicksound.bestFormat = flashGetBestAudioFormat;
                     quicksound.load = function (options) {
@@ -98,9 +102,9 @@ var quicksound = {};
         if (typeof(options.path) == 'string') {
             return createSingleLoaderFunc(audioContext, options.path + extension, options);
         } else {
-			loadMultipleAudios();
-		}
-        
+            loadMultipleAudios();
+        }
+
         function loadMultipleAudios() {
             var loaders = [];
             var successCount = 0, errorCount = 0;
@@ -151,7 +155,7 @@ var quicksound = {};
                     errorFunc: errorFunc
                 });
             }
-		}
+        }
     }
 
     function webAudioCreateSingleLoader(audioContext, path, options) {
@@ -237,14 +241,15 @@ var quicksound = {};
         var fullTries = 4;
         checkForContext(6);
         function createContext() {
-			var audioSWFElement = document.getElementById('audioSWF');
-			if (audioSWFElement == null) {
-				audioSWFElement = document.createElement('span');
-				document.body.appendChild(audioSWFElement);
-			}
+            var audioSWFElement = document.getElementById('audioSWF');
+            if (audioSWFElement == null) {
+                audioSWFElement = document.createElement('span');
+                audioSWFElement.id = 'audioSWF';
+                document.body.appendChild(audioSWFElement);
+            }
             audioSWFElement.innerHTML = '<object id="audioSWF1" width="1" height="1">' +
-                '<param name="movie" value="quicksound-0.5.1.swf">' +
-                '<embed id="audioSWF2" src="quicksound-0.5.1.swf" width="1" height="1"></embed>' +
+                '<param name="movie" value="quicksound-' + quicksound.version() + '.swf">' +
+                '<embed id="audioSWF2" src="quicksound-' + quicksound.version() + '.swf" width="1" height="1"></embed>' +
                 '</object>';
         }
 
