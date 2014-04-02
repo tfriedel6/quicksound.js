@@ -1,0 +1,3 @@
+JDK_BIN_PATH=/path/to/jdk/bin/
+AIR_SDK_BIN_PATH=/path/to/airsdk/bin/
+CLOSURE_COMPILER_PATH=/path/to/closure/compiler.jar
