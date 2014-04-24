@@ -1,6 +1,8 @@
 # quicksound.js
 
-A very simple JavaScript sound library using the Web Audio API and a fallback to flash.
+A very simple JavaScript sound library using the Web Audio API and a fallback to flash. On the desktop it works with any browser that supports either Web Audio API or the flash fallback. On mobile it works with Chrome or Firefox for Android, and iOS Safari as of iOS 6. See the following for Web Audio API support:
+
+http://caniuse.com/#feat=audio-api
 
 To use this library, download the minified (or non-minified) JS in the release directory, as well as the swf file which must be placed next to the HTML in which you include the JS.
 
